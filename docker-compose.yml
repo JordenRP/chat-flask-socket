@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  chat-server:
+    build:
+      context: .
+      target: chat-server
+    ports:
+      - "5000:5000"
+    networks:
+      - chat-network
+
+  web-server:
+    build:
+      context: .
+      target: web-server
+    image: nginx
+    ports:
+      - "8080:80"
+    networks:
+      - chat-network
+
+networks:
+  chat-network:
+    driver: bridge
